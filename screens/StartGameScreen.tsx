@@ -11,13 +11,27 @@ import {
 import { Card } from "../components/Card";
 import Colors from "../constants/colors";
 import { Input } from "../components/Input";
+import { NumberContainer } from "../components/NumberContainer";
+
+// type ConfirmedInputViewProps = {
+//   confirmedInput: number;
+// };
+
+// const ConfirmedInputView = (props: ConfirmedInputViewProps) => {
+//   return (
+//     <Card style={styles.confirmedInputContainer}>
+//       <Text>You Selected</Text>
+
+//     </Card>
+//   );
+// };
 
 type StartGameScreenProps = {};
 
 export const StartGameScreen = (props: StartGameScreenProps) => {
   const [enteredValue, setEnteredValue] = useState("");
   const [confirmedInput, setConfirmedInput] = useState(false);
-  const [selectedNumber, setSelectedNumber] = useState<number | undefined>();
+  const [selectedNumber, setSelectedNumber] = useState<number>();
 
   const numberInputHandler = (inputText: string) => {
     setEnteredValue(inputText.replace(/[^0-9]/g, "")); // replace any character that is not 0 - 9 with empy string
@@ -31,7 +45,6 @@ export const StartGameScreen = (props: StartGameScreenProps) => {
   const confirmInputHandler = () => {
     const chosenNumber = parseInt(enteredValue, 10);
 
-    // Only allow numbers between 1 and 99
     if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
       Alert.alert(
         "Invalid Input",
@@ -44,13 +57,8 @@ export const StartGameScreen = (props: StartGameScreenProps) => {
     setConfirmedInput(true);
     setSelectedNumber(chosenNumber);
     setEnteredValue("");
+    Keyboard.dismiss();
   };
-
-  let confirmedOutput;
-
-  if (confirmedInput) {
-    confirmedOutput = <Text>Chosen Number {selectedNumber}</Text>;
-  }
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -85,7 +93,7 @@ export const StartGameScreen = (props: StartGameScreenProps) => {
             </View>
           </View>
         </Card>
-        {confirmedOutput}
+        {confirmedInput && <NumberContainer number={selectedNumber!} />}
       </View>
     </TouchableWithoutFeedback>
   );
