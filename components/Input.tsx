@@ -7,7 +7,9 @@ type InputProps = {
   autoCapitalize?: "none" | "sentences" | "words" | "characters" | undefined;
   autoCorrect?: boolean;
   keyboardType?: KeyboardTypeOptions;
-  maxLength?: number
+  maxLength?: number;
+  onChangeText: (input: string) => void;
+  value: string
 };
 
 export const Input = (props: InputProps) => {
