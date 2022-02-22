@@ -15,9 +15,36 @@ type StartGameScreenProps = {};
 
 export const StartGameScreen = (props: StartGameScreenProps) => {
   const [enteredValue, setEnteredValue] = useState("");
+  const [confirmedInput, setConfirmedInput] = useState(false);
+  const [selectedNumber, setSelectedNumber] = useState<number | undefined>();
+
   const numberInputHandler = (inputText: string) => {
     setEnteredValue(inputText.replace(/[^0-9]/g, "")); // replace any character that is not 0 - 9 with empy string
   };
+
+  const resetInputHandler = () => {
+    setConfirmedInput(false);
+    setEnteredValue("");
+  };
+
+  const confirmInputHandler = () => {
+    const chosenNumber = parseInt(enteredValue, 10);
+
+    // Only allow numbers between 1 and 99
+    if (chosenNumber == NaN || chosenNumber <= 0 || chosenNumber > 99) {
+      return;
+    }
+
+    setConfirmedInput(true);
+    setSelectedNumber(chosenNumber);
+    setEnteredValue("");
+  };
+
+  let confirmedOutput;
+
+  if (confirmedInput) {
+    confirmedOutput = <Text>Chosen Number {selectedNumber}</Text>;
+  }
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -39,19 +66,20 @@ export const StartGameScreen = (props: StartGameScreenProps) => {
             <View style={styles.button}>
               <Button
                 title="Reset"
-                onPress={() => {}}
+                onPress={resetInputHandler}
                 color={Colors.secondary}
               />
             </View>
             <View style={styles.button}>
               <Button
                 title="Confirm"
-                onPress={() => {}}
+                onPress={confirmInputHandler}
                 color={Colors.primary}
               />
             </View>
           </View>
         </Card>
+        {confirmedOutput}
       </View>
     </TouchableWithoutFeedback>
   );
