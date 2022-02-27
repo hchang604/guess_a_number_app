@@ -26,7 +26,9 @@ import { NumberContainer } from "../components/NumberContainer";
 //   );
 // };
 
-type StartGameScreenProps = {};
+type StartGameScreenProps = {
+  onStartGame: (value: number) => void
+};
 
 export const StartGameScreen = (props: StartGameScreenProps) => {
   const [enteredValue, setEnteredValue] = useState("");
@@ -93,7 +95,16 @@ export const StartGameScreen = (props: StartGameScreenProps) => {
             </View>
           </View>
         </Card>
-        {confirmedInput && <NumberContainer number={selectedNumber!} />}
+        {/* {confirmedInput && <NumberContainer onStartGame={props.onStartGame} number={selectedNumber!} />} */}
+        {(confirmedInput && selectedNumber) && (
+          <Card style={styles.cardContainer}>
+          <Text>You Selected</Text>
+          <View style={styles.numberContainer}>
+            <Text style={styles.number}>{selectedNumber}</Text>
+          </View>
+          <Button title="START GAME" onPress={() => props.onStartGame(selectedNumber)} />
+        </Card>
+        )}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -127,5 +138,22 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     marginVertical: 10,
+  },
+  cardContainer: {
+    marginTop: 20,
+    alignItems: "center"
+  },
+  numberContainer: {
+    borderWidth: 2,
+    borderColor: Colors.secondary,
+    padding: 10,
+    borderRadius: 10,
+    marginVertical: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  number: {
+    color: Colors.secondary,
+    fontSize: 22,
   },
 });

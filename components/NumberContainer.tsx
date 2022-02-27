@@ -10,11 +10,9 @@ type NumberContainerProps = {
 export const NumberContainer = (props: NumberContainerProps) => {
   return (
     <Card style={styles.cardContainer}>
-      <Text>You Selected</Text>
       <View style={styles.numberContainer}>
         <Text style={styles.number}>{props.number}</Text>
       </View>
-      {/* TODO: Implement START GAME Button <Button title="START GAME" /> */}
     </Card>
   );
 };
