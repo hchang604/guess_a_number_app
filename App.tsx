@@ -25,7 +25,11 @@ export default function App() {
       <AppLoading
         startAsync={fetchFonts}
         onFinish={() => setDataLoaded(true)}
-        onError={() => Alert.alert("Error", "Unable to fetch assets, please relaunch app.", [{ text: "Okay", style: "cancel" }])}
+        onError={() =>
+          Alert.alert("Error", "Unable to fetch assets, please relaunch app.", [
+            { text: "Okay", style: "cancel" },
+          ])
+        }
       />
     );
   }

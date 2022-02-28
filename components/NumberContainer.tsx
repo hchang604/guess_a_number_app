@@ -11,14 +11,14 @@ type NumberContainerProps = {
 };
 
 export const NumberContainer = (props: NumberContainerProps) => {
-  let containerTitle = <></>
-  let containerButton = <></>
+  let containerTitle = <></>;
+  let containerButton = <></>;
 
-  if(props.containerTitle) {
-    containerTitle = <BodyText text={props.containerTitle} />
+  if (props.containerTitle) {
+    containerTitle = <BodyText text={props.containerTitle} />;
   }
 
-  if(props.buttonElement) {
+  if (props.buttonElement) {
     containerButton = props.buttonElement;
   }
 
@@ -36,7 +36,7 @@ export const NumberContainer = (props: NumberContainerProps) => {
 const styles = StyleSheet.create({
   cardContainer: {
     marginTop: 20,
-    alignItems: "center"
+    alignItems: "center",
   },
   numberContainer: {
     borderWidth: 2,

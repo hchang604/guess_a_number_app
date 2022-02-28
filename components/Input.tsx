@@ -9,7 +9,7 @@ type InputProps = {
   keyboardType?: KeyboardTypeOptions;
   maxLength?: number;
   onChangeText: (input: string) => void;
-  value: string
+  value: string;
 };
 
 export const Input = (props: InputProps) => {

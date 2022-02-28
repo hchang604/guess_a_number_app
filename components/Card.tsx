@@ -2,16 +2,14 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 
 type CardProps = {
-    style?: Object
-    children: JSX.Element | JSX.Element[]
+  style?: Object;
+  children: JSX.Element | JSX.Element[];
 };
 
 export const Card = (props: CardProps) => {
   return (
-    <View style={{...styles.card, ...props.style}}>
-        {props.children}
-    </View>
-  )
+    <View style={{ ...styles.card, ...props.style }}>{props.children}</View>
+  );
 };
 
 const styles = StyleSheet.create({
