@@ -11,23 +11,12 @@ import {
 import { Card } from "../components/Card";
 import Colors from "../constants/colors";
 import { Input } from "../components/Input";
+import { TitleText } from "../components/TitleText";
+import { BodyText } from "../components/BodyText";
 import { NumberContainer } from "../components/NumberContainer";
 
-// type ConfirmedInputViewProps = {
-//   confirmedInput: number;
-// };
-
-// const ConfirmedInputView = (props: ConfirmedInputViewProps) => {
-//   return (
-//     <Card style={styles.confirmedInputContainer}>
-//       <Text>You Selected</Text>
-
-//     </Card>
-//   );
-// };
-
 type StartGameScreenProps = {
-  onStartGame: (value: number) => void
+  onStartGame: (value: number) => void;
 };
 
 export const StartGameScreen = (props: StartGameScreenProps) => {
@@ -65,9 +54,9 @@ export const StartGameScreen = (props: StartGameScreenProps) => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.screen}>
-        <Text style={styles.title}>Start a New Game</Text>
+        <TitleText text="Start a New Game" styles={styles.title} />
         <Card style={styles.inputContainer}>
-          <Text>Select a Number</Text>
+          <BodyText text="Select a Number" />
           <Input
             style={styles.input}
             blurOnSubmit={true}
@@ -95,15 +84,17 @@ export const StartGameScreen = (props: StartGameScreenProps) => {
             </View>
           </View>
         </Card>
-        {/* {confirmedInput && <NumberContainer onStartGame={props.onStartGame} number={selectedNumber!} />} */}
-        {(confirmedInput && selectedNumber) && (
-          <Card style={styles.cardContainer}>
-          <Text>You Selected</Text>
-          <View style={styles.numberContainer}>
-            <Text style={styles.number}>{selectedNumber}</Text>
-          </View>
-          <Button title="START GAME" onPress={() => props.onStartGame(selectedNumber)} />
-        </Card>
+        {confirmedInput && selectedNumber && (
+          <NumberContainer
+            number={selectedNumber}
+            containerTitle="You Selected:"
+            buttonElement={
+              <Button
+                title="START GAME"
+                onPress={() => props.onStartGame(selectedNumber)}
+              />
+            }
+          />
         )}
       </View>
     </TouchableWithoutFeedback>
@@ -137,24 +128,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontFamily: 'open-sans-bold',
     marginVertical: 10,
-  },
-  cardContainer: {
-    marginTop: 20,
-    alignItems: "center"
-  },
-  numberContainer: {
-    borderWidth: 2,
-    borderColor: Colors.secondary,
-    padding: 10,
-    borderRadius: 10,
-    marginVertical: 10,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  number: {
-    color: Colors.secondary,
-    fontSize: 22,
-  },
+  }
 });
