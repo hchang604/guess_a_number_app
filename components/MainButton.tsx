@@ -3,7 +3,7 @@ import Colors from "../constants/colors";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 type MainButtonProps = {
-  buttonText: string;
+  buttonContent: string | JSX.Element;
   onPressHandler: (parameter?: any) => void;
 };
 
@@ -11,7 +11,7 @@ export const MainButton = (props: MainButtonProps) => {
   return (
     <TouchableOpacity activeOpacity={0.6} onPress={props.onPressHandler}>
       <View style={styles.button}>
-        <Text style={styles.buttonText}>{props.buttonText}</Text>
+        <Text style={styles.buttonText}>{props.buttonContent}</Text>
       </View>
     </TouchableOpacity>
   );
