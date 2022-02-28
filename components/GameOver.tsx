@@ -1,7 +1,8 @@
 import React from "react";
 import { BodyText } from "./BodyText";
 import { TitleText } from "./TitleText";
-import { View, StyleSheet, Button, Image } from "react-native";
+import Colors from "../constants/colors";
+import { View, StyleSheet, Button, Text, Image } from "react-native";
 
 type GameOverProps = {
   rounds: number;
@@ -14,13 +15,16 @@ export const GameOver = (props: GameOverProps) => {
     <View style={styles.screen}>
       <TitleText text="The Game is Over" />
       <View style={styles.imageContainer}>
-        <Image
-          style={styles.image}
-          source={require("../assets/success.png")}
-        />
+        <Image style={styles.image} source={require("../assets/success.png")} />
       </View>
-      <BodyText text={`Number of rounds: ${props.rounds}`} />
-      <BodyText text={`Number was: ${props.userNumber}`} />
+      <View style={styles.summaryContainer}>
+        <Text style={styles.summaryText}>
+          Your phone needed <Text style={styles.highlight}>{props.rounds}</Text>{" "}
+          attempts to guess the number{" "}
+          <Text style={styles.highlight}>{props.userNumber}</Text>
+        </Text>
+      </View>
+      {/* <BodyText text={`Your phone needed ${props.rounds} to guess the number ${props.userNumber}` /> */}
       <Button title="New Game" onPress={props.onGameRestart} />
     </View>
   );
@@ -37,12 +41,22 @@ const styles = StyleSheet.create({
     width: 300,
     borderRadius: 200,
     borderWidth: 3,
-    borderColor: 'black',
-    overflow: 'hidden',
-    marginVertical: 30
+    borderColor: "black",
+    overflow: "hidden",
+    marginVertical: 30,
   },
   image: {
     width: "100%",
-    height: "100%"
+    height: "100%",
+  },
+  summaryContainer: {
+      marginBottom: 15
+  },
+  summaryText: {
+    fontFamily: "open-sans-bold",
+    textAlign: 'center'
+  },
+  highlight: {
+    color: Colors.primary,
   },
 });
