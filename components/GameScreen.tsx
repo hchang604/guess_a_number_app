@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert, ScrollView } from "react-native";
+import Colors from "../constants/colors";
 import { Card } from "./Card";
 import { BodyText } from "./BodyText";
 import { MainButton } from "./MainButton";
@@ -22,22 +23,21 @@ const generateRandomBetween = (
 
 type GameScreenProps = {
   userNumber: number;
-  onGameOver: (rounds: number) => void;
+  onGameOver: (pastGuesses: number[]) => void;
 };
 
 export const GameScreen = (props: GameScreenProps) => {
-  const [currentGuess, setCurrentGuess] = useState(
-    generateRandomBetween(1, 100, props.userNumber)
-  );
-  const [rounds, setRounds] = useState(0);
-
+  const initialGuess = generateRandomBetween(1, 100, props.userNumber);
+  const [currentGuess, setCurrentGuess] = useState(initialGuess);
+  const [pastGuesses, updatePastGuesses] = useState<number[]>([initialGuess]);
   const currentLow = useRef(1);
   const currentHigh = useRef(100);
   const { userNumber, onGameOver } = props;
+  const scrollViewRef = useRef<ScrollView>(null);
 
   useEffect(() => {
     if (currentGuess === props.userNumber) {
-      props.onGameOver(rounds);
+      props.onGameOver(pastGuesses);
     }
   }, [currentGuess, userNumber, onGameOver]);
 
@@ -63,8 +63,9 @@ export const GameScreen = (props: GameScreenProps) => {
       currentHigh.current,
       currentGuess
     );
+
     setCurrentGuess(nextNumber);
-    setRounds(rounds + 1);
+    updatePastGuesses([...pastGuesses, nextNumber]);
   };
 
   return (
@@ -81,6 +82,23 @@ export const GameScreen = (props: GameScreenProps) => {
           onPressHandler={() => nextGuessHandler("LOWER")}
         />
       </Card>
+      <ScrollView
+        style={styles.list}
+        ref={scrollViewRef}
+        onContentSizeChange={() => {
+          scrollViewRef.current &&
+            scrollViewRef.current.scrollToEnd({ animated: true });
+        }}
+      >
+        {pastGuesses.map((guess, index) => {
+          return (
+            <View style={styles.listItem} key={index}>
+              <BodyText text={`Round ${index + 1} `} styles={styles.listText} />
+              <BodyText text={`${guess}`} styles={styles.listText} />
+            </View>
+          );
+        })}
+      </ScrollView>
     </View>
   );
 };
@@ -93,8 +111,23 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     justifyContent: "space-around",
-    marginTop: 20,
+    marginVertical: 10,
     height: 150,
     maxHeight: "80%",
+  },
+  list: {
+    width: "80%",
+    height: "100%",
+  },
+  listItem: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    borderColor: Colors.secondary,
+    borderWidth: 1,
+    padding: 15,
+    marginVertical: 5,
+  },
+  listText: {
+    textAlign: "center",
   },
 });

@@ -44,8 +44,8 @@ export default function App() {
     setGuessRounds(0);
   };
 
-  const gameOverHandler = (roundsPlayed: number) => {
-    setGuessRounds(roundsPlayed);
+  const gameOverHandler = (roundsPlayed: number[]) => {
+    setGuessRounds(roundsPlayed.length);
   };
 
   let content = <StartGameScreen onStartGame={startGameHandler} />;
