@@ -25,7 +25,7 @@ export const GameOver = (props: GameOverProps) => {
         </Text>
       </View>
       <MainButton
-        buttonText="New Game"
+        buttonContent="New Game"
         onPressHandler={() => props.onGameRestart()}
       />
     </View>

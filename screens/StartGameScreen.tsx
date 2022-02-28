@@ -90,7 +90,7 @@ export const StartGameScreen = (props: StartGameScreenProps) => {
             containerTitle="You Selected:"
             buttonElement={
               <MainButton
-                buttonText="START GAME"
+                buttonContent="START GAME"
                 onPressHandler={() => props.onStartGame(selectedNumber)}
               />
             }
