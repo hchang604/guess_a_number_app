@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import { View, Text, StyleSheet, Button, Alert } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import { Card } from "./Card";
 import { BodyText } from "./BodyText";
+import { MainButton } from "./MainButton";
 import { NumberContainer } from "./NumberContainer";
 
 const generateRandomBetween = (
@@ -31,7 +32,7 @@ export const GameScreen = (props: GameScreenProps) => {
 
   const currentLow = useRef(1);
   const currentHigh = useRef(100);
-  const {userNumber, onGameOver} = props
+  const { userNumber, onGameOver } = props;
 
   useEffect(() => {
     if (currentGuess === props.userNumber) {
@@ -70,8 +71,8 @@ export const GameScreen = (props: GameScreenProps) => {
       <BodyText text="Opponent's Guess" />
       <NumberContainer number={currentGuess} />
       <Card style={styles.buttonContainer}>
-        <Button title="LOWER" onPress={() => nextGuessHandler("LOWER")} />
-        <Button title="GREATER" onPress={() => nextGuessHandler("GREATER")} />
+          <MainButton buttonText="GREATER" onPressHandler={() => nextGuessHandler("GREATER")} />
+          <MainButton buttonText="LOWER" onPressHandler={() => nextGuessHandler("LOWER")} />
       </Card>
     </View>
   );
@@ -84,10 +85,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonContainer: {
-    flexDirection: "row",
     justifyContent: "space-around",
     marginTop: 20,
-    width: 300,
-    maxWidth: "80%",
+    height: 150,
+    maxHeight: "80%"
   },
 });

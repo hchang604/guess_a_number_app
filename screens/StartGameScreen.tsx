@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import {
   View,
   StyleSheet,
-  Text,
   Button,
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
 } from "react-native";
+import { MainButton } from "../components/MainButton";
 import { Card } from "../components/Card";
 import Colors from "../constants/colors";
 import { Input } from "../components/Input";
@@ -89,9 +89,9 @@ export const StartGameScreen = (props: StartGameScreenProps) => {
             number={selectedNumber}
             containerTitle="You Selected:"
             buttonElement={
-              <Button
-                title="START GAME"
-                onPress={() => props.onStartGame(selectedNumber)}
+              <MainButton
+                buttonText="START GAME"
+                onPressHandler={() => props.onStartGame(selectedNumber)}
               />
             }
           />
@@ -129,5 +129,5 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     marginVertical: 10,
-  }
+  },
 });

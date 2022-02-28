@@ -1,8 +1,8 @@
 import React from "react";
-import { BodyText } from "./BodyText";
 import { TitleText } from "./TitleText";
 import Colors from "../constants/colors";
-import { View, StyleSheet, Button, Text, Image } from "react-native";
+import { MainButton } from "./MainButton";
+import { View, StyleSheet, Text, Image } from "react-native";
 
 type GameOverProps = {
   rounds: number;
@@ -24,8 +24,10 @@ export const GameOver = (props: GameOverProps) => {
           <Text style={styles.highlight}>{props.userNumber}</Text>
         </Text>
       </View>
-      {/* <BodyText text={`Your phone needed ${props.rounds} to guess the number ${props.userNumber}` /> */}
-      <Button title="New Game" onPress={props.onGameRestart} />
+      <MainButton
+        buttonText="New Game"
+        onPressHandler={() => props.onGameRestart()}
+      />
     </View>
   );
 };
@@ -50,11 +52,11 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   summaryContainer: {
-      marginBottom: 15
+    marginBottom: 15,
   },
   summaryText: {
     fontFamily: "open-sans-bold",
-    textAlign: 'center'
+    textAlign: "center",
   },
   highlight: {
     color: Colors.primary,
