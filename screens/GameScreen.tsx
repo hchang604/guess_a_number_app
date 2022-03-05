@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import { View, StyleSheet, Alert, ScrollView } from "react-native";
+import { View, StyleSheet, Alert, ScrollView, Dimensions } from "react-native";
 import Colors from "../constants/colors";
-import { Card } from "./Card";
-import { BodyText } from "./BodyText";
-import { MainButton } from "./MainButton";
+import { Card } from "../components/Card";
+import { BodyText } from "../components/BodyText";
+import { MainButton } from "../components/MainButton";
 import { Ionicons } from "@expo/vector-icons";
-import { NumberContainer } from "./NumberContainer";
+import { NumberContainer } from "../components/NumberContainer";
 
 const generateRandomBetween = (
   min: number,
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     justifyContent: "space-around",
-    marginVertical: 10,
+    marginVertical: Dimensions.get("window").height > 600 ? 20 : 5,
     height: 150,
     maxHeight: "80%",
   },

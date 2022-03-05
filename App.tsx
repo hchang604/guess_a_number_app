@@ -4,9 +4,9 @@ import AppLoading from "expo-app-loading";
 import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, Alert } from "react-native";
 import { Header } from "./components/Header";
-import { GameScreen } from "./components/GameScreen";
+import { GameScreen } from "./screens/GameScreen";
 import { StartGameScreen } from "./screens/StartGameScreen";
-import { GameOver } from "./components/GameOver";
+import { GameOver } from "./screens/GameOver";
 
 const fetchFonts = (): Promise<void> => {
   return Font.loadAsync({
